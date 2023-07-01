@@ -10,19 +10,11 @@
 //                                                                            //
 // ************************************************************************** //
 
-/**
- * Handle basic errors with exceptional ones who can see in alert box.
- */
-
 import alert from 'G/alert.vue'
 
 const laravelValidationMixin = {
     methods: {
         laravelErros: function(errors) {
-            this.alert = {
-                type: this.$getConst('Alert', 'NOTHING'),
-                msg: ""
-            }
             if (errors.response.status === 422) {
                 Object.entries(errors.response.data.errors).forEach((entry) => {
                     const [e_index, error] = entry;

@@ -1,7 +1,6 @@
-<!-- TODO Alert must disapear after a submit. For be able to see the next alert if it's the same -->
 <template>
     <div>
-      <v-alert v-if="alert.type != null && show" :type="alert.type">
+      <v-alert :type="alert.type">
         {{ alert.msg }}
       </v-alert>
     </div>
@@ -9,7 +8,7 @@
 
 <script>
 
-const TIMER = 5000;
+const TIMER = 2500;
 
 export default {
     name: 'alert',
@@ -21,10 +20,11 @@ export default {
     },
     data() {
         return {
-          show: null,
+          show: true
         }
     },
-    methods: {
+    mounted() {
+      setTimeout(() =>  { this.$emit('flush-error') }, TIMER);
     },
 }
 </script>

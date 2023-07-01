@@ -1,7 +1,7 @@
 <template>
     <pageContainer>
         <template v-slot:alert>
-            <alert :alert="alert"/>
+            <alert v-if="alert.type != null" @flush-error="alert.type = null" :alert="alert"/>
         </template>
         <template v-slot:title>
             <span class="title-slot">Belote en Ligne</span>
@@ -48,21 +48,19 @@ export default {
     },
     methods: {
         submit: function () {
-          this.$apiRequester.initCsrf().then(() => {
-              this.$apiRequester.login({
-                  'email' : this.email,
-                  'password' : this.password
-              })
-              .then((response) => {
-                  if (response.status == 204) {
-                      this.alert = {
-                          type: 'success',
-                          msg: "Vous etes auhtentifie"
-                      }
-                  }
-              })
-              .catch((errors) => this.laravelErros(errors));
-          })
+            this.$apiRequester.login({
+                'email' : this.email,
+                'password' : this.password
+            })
+            .then((response) => {
+                if (response.status == 204) {
+                    this.alert = {
+                        type: 'success',
+                        msg: "Vous etes auhtentifie"
+                    }
+                }
+            })
+            .catch((errors) => this.laravelErros(errors));
         },
         wrongCredentials: function() {
             this.alert = {

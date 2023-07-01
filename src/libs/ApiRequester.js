@@ -23,10 +23,6 @@ export default class ApiRequester {
         this.initCsrf();
     }
 
-    deck(){
-        return this.axios.get(`${this.baseUrl}/test`);
-    }
-
     login(params){
         return this.axios.post(`${this.baseUrl}/login`, params);
     }

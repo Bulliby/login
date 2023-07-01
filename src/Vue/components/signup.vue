@@ -1,7 +1,7 @@
 <template>
     <pageContainer>
         <template v-slot:alert>
-            <alert :alert="alert"/>
+            <alert v-if="alert.type != null" @flush-error="alert.type = null" :alert="alert"/>
         </template>
         <template v-slot:title>
             <span class="title-slot">Belote en Ligne (Inscription)</span>
